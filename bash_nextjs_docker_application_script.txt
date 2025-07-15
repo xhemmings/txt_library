@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# =============================================
+# INSTALL DEVELOPMENT TOOLS & VS CODE EXTENSIONS
+# =============================================
+
+# Update system packages
+sudo apt update && sudo apt upgrade -y
+
+# ---------------------------------------------
+# 1. Install Docker
+# ---------------------------------------------
+echo "Installing Docker..."
+sudo apt install -y docker.io
+sudo systemctl enable --now docker
+sudo usermod -aG docker $USER  # Allows current user to run Docker without sudo
+
+# Verify Docker
+docker --version
+
+# ---------------------------------------------
+# 2. Install ESLint & Prettier (globally or in project)
+# ---------------------------------------------
+echo "Installing ESLint & Prettier..."
+npm install -g eslint prettier eslint-config-prettier eslint-plugin-prettier
+
+# ---------------------------------------------
+# 3. Install VS Code Extensions
+# ---------------------------------------------
+echo "Installing VS Code extensions..."
+code --install-extension dbaeumer.vscode-eslint          # ESLint
+code --install-extension esbenp.prettier-vscode          # Prettier
+code --install-extension bradlc.vscode-tailwindcss       # Tailwind CSS IntelliSense
+code --install-extension rangav.vscode-thunder-client   # Thunder Client (API testing)
+
+# ---------------------------------------------
+# 4. Verify installations
+# ---------------------------------------------
+echo "=== INSTALLATION COMPLETE ==="
+echo "- Docker: $(docker --version)"
+echo "- ESLint: $(eslint --version)"
+echo "- Prettier: $(prettier --version)"
+echo "- VS Code extensions installed:"
+echo "  • ESLint, Prettier, Tailwind CSS IntelliSense, Thunder Client"
